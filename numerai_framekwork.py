@@ -3,6 +3,7 @@
 # --------------------
 # Libraries
 # --------------------
+
 import csv
 import pandas as pd
 import numpy as np
@@ -11,7 +12,6 @@ from pycaret.datasets import get_data
 from pycaret.regression import *
 
 import requests
-
 
 import plotly.express as px
 import plotly.graph_objects as go
@@ -24,7 +24,6 @@ import numerapi
 import sklearn.linear_model
 
 import mlflow
-
 
 mlflow.set_tracking_uri("file:///C:Users/marianota/Projects/numerai_framework/mlruns")
 
@@ -90,6 +89,7 @@ if exploration:
 
     from pycaret.datasets import get_data
     dataset = get_data('training_data', profile=True)
+
 
 #-------------------------------------------------------
 # Feature Engineering using feature engine library
@@ -208,15 +208,9 @@ data = pd.concat([features,target], axis=1)
 data.head()
 
 
-
 #-------------------------------------
 # Pycaret feature engineering
 #-------------------------------------
-
-client = connect_tg()
-client.connect()
-
-send_message('Train begins...')
 
 # This step includes feature engineering, cleaning data, prepare data for training
 exp = setup(data,
@@ -242,7 +236,6 @@ best_result = pull()
 print(best_result)
 
 model = create_model('lightgbm')
-
 
 best_specific = compare_models(include = ['dt','rf','xgboost'])
 
